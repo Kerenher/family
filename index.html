@@ -6,6 +6,27 @@
     <title>A Tribute to Bubby</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script>
+        // showMedia handles both images and videos
+        function showMedia(element) {
+            element.style.display = 'block';
+            const parent = element.closest('.media-zone');
+            if (parent) {
+                const placeholder = parent.querySelector('.placeholder-text');
+                if (placeholder) {
+                    placeholder.style.display = 'none';
+                }
+            }
+        }
+
+        // Specific handler for videos that might fail to trigger loadeddata on mobile
+        function handleVideoLoad(vid) {
+            // If metadata is loaded, we can usually show the player
+            if (vid.readyState >= 1) {
+                showMedia(vid);
+            }
+        }
+    </script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -26,9 +47,9 @@
             border-radius: 8px;
             overflow: hidden;
             position: relative;
+            min-height: 150px; /* Ensures space on mobile */
         }
         
-        /* The images and videos now scale to fit perfectly without being cut off */
         .media-zone img, .media-zone video {
             width: 100%;
             height: 100%;
@@ -36,8 +57,8 @@
             position: absolute;
             top: 0;
             left: 0;
-            background-color: #f8f6f2; /* Subtle frame color */
-            display: none; /* Hidden until loaded */
+            background-color: #f8f6f2; 
+            display: none; /* Hidden until script confirms load */
         }
         
         .letter-content p {
@@ -68,9 +89,9 @@
         <!-- Header Portrait (File: portrait.jpg) -->
         <header class="text-center mb-16">
             <div class="media-zone mx-auto mb-6" data-orientation="portrait">
-                <img src="portrait.jpg" onload="showMedia(this)">
+                <img src="portrait.jpg" onload="showMedia(this)" onerror="console.log('Portrait missing')">
                 <div class="placeholder-text p-6 opacity-40">
-                    <p class="text-xs italic">Bubby's Portrait<br>(Upload portrait.jpg)</p>
+                    <p class="text-xs italic text-stone-400 font-medium uppercase tracking-widest">Portrait</p>
                 </div>
             </div>
         </header>
@@ -83,9 +104,9 @@
 
             <!-- Video: Skydiving (File: skydiving.mp4) -->
             <div class="media-zone mb-12" data-orientation="landscape">
-                <video src="skydiving.mp4" controls playsinline webkit-playsinline onloadeddata="showMedia(this)"></video>
+                <video src="skydiving.mp4" controls preload="metadata" playsinline webkit-playsinline onloadedmetadata="handleVideoLoad(this)" onplay="showMedia(this)"></video>
                 <div class="placeholder-text p-6 opacity-40">
-                    <p class="text-xs italic">Skydiving Video<br>(Upload skydiving.mp4)</p>
+                    <p class="text-xs italic text-stone-400 font-medium uppercase tracking-widest">Skydiving Video</p>
                 </div>
             </div>
 
@@ -94,11 +115,11 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-12">
                 <div class="media-zone" data-orientation="landscape">
                     <img src="dance.jpg" onload="showMedia(this)">
-                    <p class="placeholder-text text-xs p-4 opacity-40 italic">Dance (dance.jpg)</p>
+                    <p class="placeholder-text text-xs p-4 opacity-40 italic uppercase tracking-widest">Dance</p>
                 </div>
                 <div class="media-zone" data-orientation="landscape">
                     <img src="detail.jpg" onload="showMedia(this)">
-                    <p class="placeholder-text text-xs p-4 opacity-40 italic">Detail (detail.jpg)</p>
+                    <p class="placeholder-text text-xs p-4 opacity-40 italic uppercase tracking-widest">Detail</p>
                 </div>
             </div>
 
@@ -109,11 +130,11 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-12">
                 <div class="media-zone" data-orientation="portrait">
                     <img src="school1.jpg" onload="showMedia(this)">
-                    <p class="placeholder-text text-xs opacity-40 italic">School 1 (school1.jpg)</p>
+                    <p class="placeholder-text text-xs opacity-40 italic uppercase tracking-widest">School 1</p>
                 </div>
                 <div class="media-zone" data-orientation="portrait">
                     <img src="school2.jpg" onload="showMedia(this)">
-                    <p class="placeholder-text text-xs opacity-40 italic">School 2 (school2.jpg)</p>
+                    <p class="placeholder-text text-xs opacity-40 italic uppercase tracking-widest">School 2</p>
                 </div>
             </div>
 
@@ -130,15 +151,15 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-12">
                 <div class="media-zone h-40">
                     <img src="drawing.jpg" onload="showMedia(this)">
-                    <p class="placeholder-text text-xs opacity-40 italic">Drawing (drawing.jpg)</p>
+                    <p class="placeholder-text text-xs opacity-40 italic uppercase tracking-widest">Drawing</p>
                 </div>
                 <div class="media-zone h-40">
                     <img src="food.jpg" onload="showMedia(this)">
-                    <p class="placeholder-text text-xs opacity-40 italic">Food (food.jpg)</p>
+                    <p class="placeholder-text text-xs opacity-40 italic uppercase tracking-widest">Food</p>
                 </div>
                 <div class="media-zone h-40">
                     <img src="queen.jpg" onload="showMedia(this)">
-                    <p class="placeholder-text text-xs opacity-40 italic">Queen (queen.jpg)</p>
+                    <p class="placeholder-text text-xs opacity-40 italic uppercase tracking-widest">Queen</p>
                 </div>
             </div>
 
@@ -155,11 +176,11 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-12">
                 <div class="media-zone" data-orientation="landscape">
                     <img src="aus1.jpg" onload="showMedia(this)">
-                    <p class="placeholder-text text-xs opacity-40 italic">Australia 1 (aus1.jpg)</p>
+                    <p class="placeholder-text text-xs opacity-40 italic uppercase tracking-widest">Australia 1</p>
                 </div>
                 <div class="media-zone" data-orientation="landscape">
                     <img src="aus2.jpg" onload="showMedia(this)">
-                    <p class="placeholder-text text-xs opacity-40 italic">Australia 2 (aus2.jpg)</p>
+                    <p class="placeholder-text text-xs opacity-40 italic uppercase tracking-widest">Australia 2</p>
                 </div>
             </div>
 
@@ -170,11 +191,11 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-12">
                 <div class="media-zone" data-orientation="landscape">
                     <img src="flo1.jpg" onload="showMedia(this)">
-                    <p class="placeholder-text text-xs opacity-40 italic">Florida 1 (flo1.jpg)</p>
+                    <p class="placeholder-text text-xs opacity-40 italic uppercase tracking-widest">Florida 1</p>
                 </div>
                 <div class="media-zone" data-orientation="landscape">
                     <img src="flo2.jpg" onload="showMedia(this)">
-                    <p class="placeholder-text text-xs opacity-40 italic">Florida 2 (flo2.jpg)</p>
+                    <p class="placeholder-text text-xs opacity-40 italic uppercase tracking-widest">Florida 2</p>
                 </div>
             </div>
 
@@ -182,9 +203,9 @@
 
             <!-- Video: Monsey Visit (File: monsey.mp4) -->
             <div class="media-zone mb-12" data-orientation="landscape">
-                <video src="monsey.mp4" controls playsinline webkit-playsinline onloadeddata="showMedia(this)"></video>
+                <video src="monsey.mp4" controls preload="metadata" playsinline webkit-playsinline onloadedmetadata="handleVideoLoad(this)" onplay="showMedia(this)"></video>
                 <div class="placeholder-text p-6 opacity-40">
-                    <p class="text-xs italic">Monsey Video<br>(Upload monsey.mp4)</p>
+                    <p class="text-xs italic text-stone-400 font-medium uppercase tracking-widest">Monsey Video</p>
                 </div>
             </div>
 
@@ -206,14 +227,22 @@
     </div>
 
     <script>
-        // This function hides the placeholder text only when the image/video has loaded
-        function showMedia(element) {
-            element.style.display = 'block';
-            const placeholder = element.parentElement.querySelector('.placeholder-text');
-            if (placeholder) {
-                placeholder.style.display = 'none';
-            }
-        }
+        // Final safety check: Run once after DOM load
+        window.addEventListener('load', function() {
+            document.querySelectorAll('img').forEach(img => {
+                if (img.complete && img.naturalHeight !== 0) {
+                    showMedia(img);
+                }
+            });
+            document.querySelectorAll('video').forEach(vid => {
+                // If it's already ready or metadata is available, show it
+                if (vid.readyState >= 1) {
+                    showMedia(vid);
+                }
+                // Add a listener in case it loads later
+                vid.addEventListener('loadedmetadata', () => showMedia(vid));
+            });
+        });
     </script>
 
 </body>
