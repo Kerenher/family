@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Tribute to Bubby</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfbf7;
+            color: #332d2a;
+        }
+        h1, h2, .serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .media-zone {
+            background-color: #f3f0e9;
+            border: 1px dashed #d1ccc0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #8c857d;
+            border-radius: 8px;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        .media-zone:hover {
+            background-color: #ede9df;
+            border-color: #b8b0a1;
+        }
+        
+        .media-zone img, .media-zone video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; 
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #fcfaf5; 
+        }
+
+        /* Orientation Toggles */
+        .toggle-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 4px;
+            padding: 4px;
+            opacity: 0;
+            transition: opacity 0.2s;
+            border: 1px solid #d1ccc0;
+        }
+        .media-zone:hover .toggle-btn {
+            opacity: 1;
+        }
+        
+        .letter-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            body { background-color: white; padding: 0; }
+            .container-wrapper { border: none !important; shadow: none !important; padding: 0 !important; margin: 0 !important; width: 100% !important; max-width: 100% !important; }
+            .media-zone { border: none !important; background: transparent !important; }
+            .media-zone p, .media-zone svg { display: none !important; }
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        }
+    </style>
+</head>
+<body class="py-12 px-4 md:px-0">
+
+    <div class="container-wrapper max-w-4xl mx-auto bg-white shadow-sm border border-stone-100 p-8 md:p-16 rounded-sm">
+        
+        <!-- Header (Portrait Only) -->
+        <header class="text-center mb-16">
+            <div class="media-zone w-64 h-80 mx-auto mb-6" data-orientation="portrait">
+                <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)" title="Switch Orientation">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
+                </button>
+                <div class="w-full h-full flex items-center justify-center" onclick="triggerUpload('portrait')">
+                    <input type="file" id="portrait" class="hidden" accept="image/*" onchange="handleMedia(this)">
+                    <div class="p-6 pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <p class="text-sm italic">Bubby's Portrait</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- The Letter -->
+        <article class="letter-content text-stone-700">
+            <h2 class="text-3xl mb-10 italic text-stone-800">A Letter to Bubby</h2>
+            
+            <p>Bubby, my favorite memories center around you laughing. Laughing (and in shock) while watching a video of me skydiving, laughing when Ari would play music and spontaneously take your hands to dance in the kitchen, and laughing at some of the things we’d say that sounded outrageous to you, to which you’d respond “oh come on”.</p>
+
+            <!-- Video: Skydiving -->
+            <div class="media-zone h-80 w-full mb-12" data-orientation="landscape">
+                <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
+                </button>
+                <div class="w-full h-full flex items-center justify-center" onclick="triggerUpload('skydiving_vid')">
+                    <input type="file" id="skydiving_vid" class="hidden" accept="video/*" onchange="handleMedia(this)">
+                    <div class="p-6 pointer-events-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        <p class="text-sm italic">The Skydiving Video</p>
+                    </div>
+                </div>
+            </div>
+
+            <p>Bubby, you were the epitome of resilience and strength. Whenever we were together, at some point the conversation would lead to us asking about your past, your parents, siblings and life before the war. You’d speak about the smallest details from your home that brought you joy - such as the wallpaper - and you described your parents as generous people, constantly opening their home to guests. You maintained their values and upheld a welcoming home centered around family.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-12">
+                <div class="media-zone h-48" data-orientation="landscape">
+                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
+                    </button>
+                    <div class="w-full h-full flex items-center justify-center" onclick="triggerUpload('dance')">
+                        <input type="file" id="dance" class="hidden" accept="image/*" onchange="handleMedia(this)">
+                        <p class="text-xs p-4 italic pointer-events-none">Dancing with Ari</p>
+                    </div>
+                </div>
+                <div class="media-zone h-48" data-orientation="landscape">
+                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
+                    </button>
+                    <div class="w-full h-full flex items-center justify-center" onclick="triggerUpload('detail')">
+                        <input type="file" id="detail" class="hidden" accept="image/*" onchange="handleMedia(this)">
+                        <p class="text-xs p-4 italic pointer-events-none">A home detail</p>
+                    </div>
+                </div>
+            </div>
+
+            <p>During one of our trips to Florida, Ari, Gadi and I were fortunate to be there when you were invited to a school to share your story. You spoke about your life before the Holocaust, during and after (I still have the recordings). You spoke with a broken heart about life before the war, describing your family and your father’s factory. A happy, simple life.</p>
+
+            <p>It was difficult to watch you go back in time and relive the memories - a combination of longing and pain - but at the same time, it was a privilege to have witnessed your strength. It was an emotional and significant day with an everlasting impact on my life. So much so that I have thought about this day many times. One example goes back to a few years ago at work when each individual in my team was tasked with presenting three pivotal or significant life events to the broader team. I chose to speak about that day in Florida where I witnessed you share your story.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-12">
+                <div class="media-zone h-72" data-orientation="portrait">
+                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
+                    </button>
+                    <div class="w-full h-full flex items-center justify-center" onclick="triggerUpload('school_1')">
+                        <input type="file" id="school_1" class="hidden" accept="image/*" onchange="handleMedia(this)">
+                        <p class="text-xs italic pointer-events-none">Bubby at School (1)</p>
+                    </div>
+                </div>
+                <div class="media-zone h-72" data-orientation="portrait">
+                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
+                    </button>
+                    <div class="w-full h-full flex items-center justify-center" onclick="triggerUpload('school_2')">
+                        <input type="file" id="school_2" class="hidden" accept="image/*" onchange="handleMedia(this)">
+                        <p class="text-xs italic pointer-events-none">Bubby at School (2)</p>
+                    </div>
+                </div>
+            </div>
+
+            <p>Your ability to build a new life after all that you endured, in a new country, learning English from scratch at night school while working, is incredibly impressive and one that we can draw inspiration from.</p>
+
+            <p>You would often say “everything changes; nothing stays the same”, which is ironic because so much stayed the same when it came to you.</p>
+
+            <p>You demonstrated the strongest and most consistent dedication to values I had ever seen. You prioritized and loved family above all; you were very protective of those dear to you, and Judaism was at the center of everything you did in life.</p>
+
+            <p>Your consistent and disciplined nature could be seen in many daily activities - maintaining a strong fitness level and ability to walk great distances carrying groceries, reading and saying tehillim, and upholding a strict zero-waste policy.</p>
+
+            <p>Your appearance also stayed the same. When I look at photos of you holding me as a baby and compare them to photos of you well into your 80s, there is little difference! Floral prints, cardigans, skirts and knee-length stockings. Neatly-styled hair, that you brushed the sides of with your fingers throughout the day, polished nails and soft skin - you were like the queen (particularly at Sarah’s wedding), always elegant.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-12">
+                <div class="media-zone h-40" data-orientation="landscape" onclick="triggerUpload('drawing')">
+                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
+                    </button>
+                    <input type="file" id="drawing" class="hidden" accept="image/*" onchange="handleMedia(this)">
+                    <p class="text-xs italic pointer-events-none">The drawing</p>
+                </div>
+                <div class="media-zone h-40" data-orientation="landscape" onclick="triggerUpload('food')">
+                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
+                    </button>
+                    <input type="file" id="food" class="hidden" accept="image/*" onchange="handleMedia(this)">
+                    <p class="text-xs italic pointer-events-none">Cooking</p>
+                </div>
+                <div class="media-zone h-40" data-orientation="landscape" onclick="triggerUpload('queen')">
+                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
+                    </button>
+                    <input type="file" id="queen" class="hidden" accept="image/*" onchange="handleMedia(this)">
+                    <p class="text-xs italic pointer-events-none">The Queen</p>
+                </div>
+            </div>
+
+            <p>Bubby, I love that your apartment walls and shelves are filled with family photos, and that in the laundry cupboard still hangs a picture I drew over 25 years ago! Every time I come to your apartment and see this, I go back in time to sitting at your dining room table and eating the famous Bubby’s blintzes, burgers and stuffed cabbage. Your signature dishes were on rotation for our visits and I absolutely loved your food.</p>
+
+            <p>You had a talent for preserving everything in the best condition. Your washing machine and dryer must be over 30 years old and I guess your wooden cutlery could be as old as Abba.</p>
+
+            <p>Memories with you span from your visits in Maryland, to us coming to New Jersey (and then New York) for countless chagim and Thanksgivings with the extended family and all the cousins.</p>
+
+            <p>Whenever you stayed with us in Silver Spring, I remember wanting to share your bed and constantly be by your side. That seemed to never change as I shared your room in all of the visits over the last 10 years at least.</p>
+
+            <p>You also visited us twice in Australia after we moved, and I distinctly remember you walking every day, making a friend who you invited to Gadi’s bar-mitzvah and cooking us stuffed cabbage (you mentioned that it was a lot of work and I appreciated the effort because that was my favourite dish of yours). </p>
+
+            <!-- Australia Photos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-12">
+                <div class="media-zone h-56" data-orientation="landscape" onclick="triggerUpload('aus_1')">
+                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
+                    </button>
+                    <input type="file" id="aus_1" class="hidden" accept="image/*" onchange="handleMedia(this)">
+                    <p class="text-xs italic pointer-events-none">Australia 1</p>
+                </div>
+                <div class="media-zone h-56" data-orientation="landscape" onclick="triggerUpload('aus_2')">
+                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
+                    </button>
+                    <input type="file" id="aus_2" class="hidden" accept="image/*" onchange="handleMedia(this)">
+                    <p class="text-xs italic pointer-events-none">Australia 2</p>
+                </div>
+            </div>
+
+            <p>Visiting you in Florida twice (both during chagim) are also wonderful memories. We visited Evelyn and Greg at their apartment, relaxing on the balcony and enjoying the sun. You were always happiest surrounded by family.</p>
+
+            <p>The second visit in Florida was after both Ari and I had made Aliya and we surprised you at your door. Abba was with us too, and Mason, Robin and Dana joined for a day, as well as Gladys and Avi. It was a trip full of happy memories - we didn't do much except spend time together which is all I could have asked for.</p>
+
+            <!-- Florida Photos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-12">
+                <div class="media-zone h-56" data-orientation="landscape" onclick="triggerUpload('flo_1')">
+                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
+                    </button>
+                    <input type="file" id="flo_1" class="hidden" accept="image/*" onchange="handleMedia(this)">
+                    <p class="text-xs italic pointer-events-none">Florida 1</p>
+                </div>
+                <div class="media-zone h-56" data-orientation="landscape" onclick="triggerUpload('flo_2')">
+                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
+                    </button>
+                    <input type="file" id="flo_2" class="hidden" accept="image/*" onchange="handleMedia(this)">
+                    <p class="text-xs italic pointer-events-none">Florida 2</p>
+                </div>
+            </div>
+
+            <p>There are many more memories that would fill many more pages - sitting in shule with you in Englewood, going for walks together, discussions about Israel and the time you visited Abba on the kibbutz, the collection of seashells in your bedroom, Sunday bagels at your apartment with Nick and Tony, or at Glady and Martin’s, trying to convince you to eat sushi, spending time at Mason and Robin’s with Eric and Dana when we were much younger, calling you “my cute Bubby”, my most recent visit in Monsey (I also have this on video) hugging you non-stop and feeling your love. The list goes on…</p>
+
+            <!-- Video: Monsey Visit -->
+            <div class="media-zone h-80 w-full mb-12" data-orientation="landscape">
+                <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
+                </button>
+                <div class="w-full h-full flex items-center justify-center" onclick="triggerUpload('monsey_vid')">
+                    <input type="file" id="monsey_vid" class="hidden" accept="video/*" onchange="handleMedia(this)">
+                    <p class="text-sm italic">The Visit in Monsey (Video)</p>
+                </div>
+            </div>
+
+            <p>I am also so grateful that Noam, Amy and Gina had the opportunity to meet you during our visit in 2023.</p>
+
+            <p>Although you are no longer with us, your love, values and strength of character will continue to be spoken about, and instilled in our family’s future generations.</p>
+
+            <p class="mt-12 text-2xl serif italic text-stone-800">I love you deeply and always will.</p>
+            <p class="text-xl serif text-stone-800">All my love,<br>Keren</p>
+        </article>
+
+        <footer class="mt-20 pt-8 border-t border-stone-100 text-center text-stone-400 text-sm italic">
+            "Everything changes; nothing stays the same."
+        </footer>
+    </div>
+
+    <div class="max-w-4xl mx-auto mt-8 no-print flex flex-col items-center space-y-4 pb-20">
+        <button onclick="safePrint()" class="bg-stone-800 text-white px-8 py-3 rounded-full hover:bg-stone-700 transition shadow-lg font-semibold">Save as PDF / Print</button>
+    </div>
+
+    <script>
+        function triggerUpload(id) {
+            document.getElementById(id).click();
+        }
+
+        function toggleOrientation(event, btn) {
+            event.stopPropagation();
+            const zone = btn.closest('.media-zone');
+            const current = zone.getAttribute('data-orientation');
+            const isHeader = zone.parentElement.tagName === 'HEADER';
+            
+            if (current === 'landscape') {
+                zone.setAttribute('data-orientation', 'portrait');
+                if (isHeader) {
+                    zone.style.height = '20rem';
+                    zone.style.width = '16rem';
+                } else {
+                    zone.style.height = '30rem';
+                }
+            } else {
+                zone.setAttribute('data-orientation', 'landscape');
+                if (isHeader) {
+                    zone.style.height = '16rem'; 
+                    zone.style.width = '100%';
+                } else {
+                    zone.style.height = '12rem';
+                }
+            }
+        }
+
+        function handleMedia(input) {
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                const parent = input.parentElement.parentElement;
+                const fileURL = URL.createObjectURL(file);
+                
+                const oldMedia = parent.querySelectorAll('img, video');
+                oldMedia.forEach(m => m.remove());
+
+                let mediaElement;
+                if (file.type.startsWith('video/')) {
+                    mediaElement = document.createElement('video');
+                    mediaElement.src = fileURL;
+                    mediaElement.controls = true;
+                } else {
+                    mediaElement = document.createElement('img');
+                    mediaElement.src = fileURL;
+                }
+
+                parent.appendChild(mediaElement);
+                const content = parent.querySelector('div, p');
+                if (content && content.tagName !== 'BUTTON') content.style.display = 'none';
+            }
+        }
+
+        function safePrint() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
