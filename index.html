@@ -28,6 +28,7 @@
             position: relative;
         }
         
+        /* The images and videos now scale to fit perfectly without being cut off */
         .media-zone img, .media-zone video {
             width: 100%;
             height: 100%;
@@ -35,7 +36,8 @@
             position: absolute;
             top: 0;
             left: 0;
-            background-color: #fcfaf5; 
+            background-color: #f8f6f2; /* Subtle frame color */
+            display: none; /* Hidden until loaded */
         }
         
         .letter-content p {
@@ -44,10 +46,10 @@
             font-size: 1.1rem;
         }
 
-        /* Portrait sizing defaults */
-        [data-orientation="portrait"] { height: 30rem; width: 22rem; margin-left: auto; margin-right: auto; }
-        [data-orientation="landscape"] { height: 20rem; width: 100%; }
-        header [data-orientation="portrait"] { height: 20rem; width: 16rem; }
+        /* Responsive sizing */
+        [data-orientation="portrait"] { height: 32rem; width: 100%; max-width: 24rem; margin-left: auto; margin-right: auto; }
+        [data-orientation="landscape"] { height: 22rem; width: 100%; }
+        header [data-orientation="portrait"] { height: 22rem; width: 18rem; }
 
         @media print {
             .no-print { display: none !important; }
@@ -66,9 +68,9 @@
         <!-- Header Portrait (File: portrait.jpg) -->
         <header class="text-center mb-16">
             <div class="media-zone mx-auto mb-6" data-orientation="portrait">
-                <img src="portrait.jpg" onerror="this.style.display='none'">
-                <div class="p-6 opacity-30">
-                    <p class="text-xs">Portrait Placeholder<br>(Upload portrait.jpg)</p>
+                <img src="portrait.jpg" onload="showMedia(this)">
+                <div class="placeholder-text p-6 opacity-40">
+                    <p class="text-xs italic">Bubby's Portrait<br>(Upload portrait.jpg)</p>
                 </div>
             </div>
         </header>
@@ -81,9 +83,9 @@
 
             <!-- Video: Skydiving (File: skydiving.mp4) -->
             <div class="media-zone mb-12" data-orientation="landscape">
-                <video src="skydiving.mp4" controls onerror="this.style.display='none'"></video>
-                <div class="p-6 opacity-30">
-                    <p class="text-xs">Skydiving Video Placeholder<br>(Upload skydiving.mp4)</p>
+                <video src="skydiving.mp4" controls playsinline webkit-playsinline onloadeddata="showMedia(this)"></video>
+                <div class="placeholder-text p-6 opacity-40">
+                    <p class="text-xs italic">Skydiving Video<br>(Upload skydiving.mp4)</p>
                 </div>
             </div>
 
@@ -91,12 +93,12 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-12">
                 <div class="media-zone" data-orientation="landscape">
-                    <img src="dance.jpg" onerror="this.style.display='none'">
-                    <p class="text-xs p-4 opacity-30">Dance (dance.jpg)</p>
+                    <img src="dance.jpg" onload="showMedia(this)">
+                    <p class="placeholder-text text-xs p-4 opacity-40 italic">Dance (dance.jpg)</p>
                 </div>
                 <div class="media-zone" data-orientation="landscape">
-                    <img src="detail.jpg" onerror="this.style.display='none'">
-                    <p class="text-xs p-4 opacity-30">Detail (detail.jpg)</p>
+                    <img src="detail.jpg" onload="showMedia(this)">
+                    <p class="placeholder-text text-xs p-4 opacity-40 italic">Detail (detail.jpg)</p>
                 </div>
             </div>
 
@@ -106,12 +108,12 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-12">
                 <div class="media-zone" data-orientation="portrait">
-                    <img src="school1.jpg" onerror="this.style.display='none'">
-                    <p class="text-xs opacity-30">School 1 (school1.jpg)</p>
+                    <img src="school1.jpg" onload="showMedia(this)">
+                    <p class="placeholder-text text-xs opacity-40 italic">School 1 (school1.jpg)</p>
                 </div>
                 <div class="media-zone" data-orientation="portrait">
-                    <img src="school2.jpg" onerror="this.style.display='none'">
-                    <p class="text-xs opacity-30">School 2 (school2.jpg)</p>
+                    <img src="school2.jpg" onload="showMedia(this)">
+                    <p class="placeholder-text text-xs opacity-40 italic">School 2 (school2.jpg)</p>
                 </div>
             </div>
 
@@ -127,16 +129,16 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-12">
                 <div class="media-zone h-40">
-                    <img src="drawing.jpg" onerror="this.style.display='none'">
-                    <p class="text-xs opacity-30">Drawing (drawing.jpg)</p>
+                    <img src="drawing.jpg" onload="showMedia(this)">
+                    <p class="placeholder-text text-xs opacity-40 italic">Drawing (drawing.jpg)</p>
                 </div>
                 <div class="media-zone h-40">
-                    <img src="food.jpg" onerror="this.style.display='none'">
-                    <p class="text-xs opacity-30">Food (food.jpg)</p>
+                    <img src="food.jpg" onload="showMedia(this)">
+                    <p class="placeholder-text text-xs opacity-40 italic">Food (food.jpg)</p>
                 </div>
                 <div class="media-zone h-40">
-                    <img src="queen.jpg" onerror="this.style.display='none'">
-                    <p class="text-xs opacity-30">Queen (queen.jpg)</p>
+                    <img src="queen.jpg" onload="showMedia(this)">
+                    <p class="placeholder-text text-xs opacity-40 italic">Queen (queen.jpg)</p>
                 </div>
             </div>
 
@@ -152,12 +154,12 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-12">
                 <div class="media-zone" data-orientation="landscape">
-                    <img src="aus1.jpg" onerror="this.style.display='none'">
-                    <p class="text-xs opacity-30">Australia 1 (aus1.jpg)</p>
+                    <img src="aus1.jpg" onload="showMedia(this)">
+                    <p class="placeholder-text text-xs opacity-40 italic">Australia 1 (aus1.jpg)</p>
                 </div>
                 <div class="media-zone" data-orientation="landscape">
-                    <img src="aus2.jpg" onerror="this.style.display='none'">
-                    <p class="text-xs opacity-30">Australia 2 (aus2.jpg)</p>
+                    <img src="aus2.jpg" onload="showMedia(this)">
+                    <p class="placeholder-text text-xs opacity-40 italic">Australia 2 (aus2.jpg)</p>
                 </div>
             </div>
 
@@ -167,12 +169,12 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-12">
                 <div class="media-zone" data-orientation="landscape">
-                    <img src="flo1.jpg" onerror="this.style.display='none'">
-                    <p class="text-xs opacity-30">Florida 1 (flo1.jpg)</p>
+                    <img src="flo1.jpg" onload="showMedia(this)">
+                    <p class="placeholder-text text-xs opacity-40 italic">Florida 1 (flo1.jpg)</p>
                 </div>
                 <div class="media-zone" data-orientation="landscape">
-                    <img src="flo2.jpg" onerror="this.style.display='none'">
-                    <p class="text-xs opacity-30">Florida 2 (flo2.jpg)</p>
+                    <img src="flo2.jpg" onload="showMedia(this)">
+                    <p class="placeholder-text text-xs opacity-40 italic">Florida 2 (flo2.jpg)</p>
                 </div>
             </div>
 
@@ -180,9 +182,9 @@
 
             <!-- Video: Monsey Visit (File: monsey.mp4) -->
             <div class="media-zone mb-12" data-orientation="landscape">
-                <video src="monsey.mp4" controls onerror="this.style.display='none'"></video>
-                <div class="p-6 opacity-30">
-                    <p class="text-xs">Monsey Video Placeholder<br>(Upload monsey.mp4)</p>
+                <video src="monsey.mp4" controls playsinline webkit-playsinline onloadeddata="showMedia(this)"></video>
+                <div class="placeholder-text p-6 opacity-40">
+                    <p class="text-xs italic">Monsey Video<br>(Upload monsey.mp4)</p>
                 </div>
             </div>
 
@@ -199,9 +201,20 @@
         </footer>
     </div>
 
-    <div class="max-w-4xl mx-auto mt-8 no-print flex flex-col items-center space-y-4 pb-20">
+    <div class="max-w-4xl mx-auto mt-8 no-print flex flex-col items-center space-y-4 pb-20 text-stone-400">
         <button onclick="window.print()" class="bg-stone-800 text-white px-8 py-3 rounded-full hover:bg-stone-700 transition shadow-lg font-semibold">Save as PDF / Print</button>
     </div>
+
+    <script>
+        // This function hides the placeholder text only when the image/video has loaded
+        function showMedia(element) {
+            element.style.display = 'block';
+            const placeholder = element.parentElement.querySelector('.placeholder-text');
+            if (placeholder) {
+                placeholder.style.display = 'none';
+            }
+        }
+    </script>
 
 </body>
 </html>
