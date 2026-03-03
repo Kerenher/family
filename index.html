@@ -24,14 +24,8 @@
             text-align: center;
             color: #8c857d;
             border-radius: 8px;
-            cursor: pointer;
             overflow: hidden;
             position: relative;
-            transition: all 0.2s ease;
-        }
-        .media-zone:hover {
-            background-color: #ede9df;
-            border-color: #b8b0a1;
         }
         
         .media-zone img, .media-zone video {
@@ -43,29 +37,18 @@
             left: 0;
             background-color: #fcfaf5; 
         }
-
-        /* Orientation Toggles */
-        .toggle-btn {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            z-index: 20;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 4px;
-            padding: 4px;
-            opacity: 0;
-            transition: opacity 0.2s;
-            border: 1px solid #d1ccc0;
-        }
-        .media-zone:hover .toggle-btn {
-            opacity: 1;
-        }
         
         .letter-content p {
             margin-bottom: 1.5rem;
             line-height: 1.8;
             font-size: 1.1rem;
         }
+
+        /* Portrait sizing defaults */
+        [data-orientation="portrait"] { height: 30rem; width: 22rem; margin-left: auto; margin-right: auto; }
+        [data-orientation="landscape"] { height: 20rem; width: 100%; }
+        header [data-orientation="portrait"] { height: 20rem; width: 16rem; }
+
         @media print {
             .no-print { display: none !important; }
             body { background-color: white; padding: 0; }
@@ -80,20 +63,12 @@
 
     <div class="container-wrapper max-w-4xl mx-auto bg-white shadow-sm border border-stone-100 p-8 md:p-16 rounded-sm">
         
-        <!-- Header (Portrait Only) -->
+        <!-- Header Portrait (File: portrait.jpg) -->
         <header class="text-center mb-16">
-            <div class="media-zone w-64 h-80 mx-auto mb-6" data-orientation="portrait">
-                <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)" title="Switch Orientation">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
-                </button>
-                <div class="w-full h-full flex items-center justify-center" onclick="triggerUpload('portrait')">
-                    <input type="file" id="portrait" class="hidden" accept="image/*" onchange="handleMedia(this)">
-                    <div class="p-6 pointer-events-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <p class="text-sm italic">Bubby's Portrait</p>
-                    </div>
+            <div class="media-zone mx-auto mb-6" data-orientation="portrait">
+                <img src="portrait.jpg" onerror="this.style.display='none'">
+                <div class="p-6 opacity-30">
+                    <p class="text-xs">Portrait Placeholder<br>(Upload portrait.jpg)</p>
                 </div>
             </div>
         </header>
@@ -104,42 +79,24 @@
             
             <p>Bubby, my favorite memories center around you laughing. Laughing (and in shock) while watching a video of me skydiving, laughing when Ari would play music and spontaneously take your hands to dance in the kitchen, and laughing at some of the things we’d say that sounded outrageous to you, to which you’d respond “oh come on”.</p>
 
-            <!-- Video: Skydiving -->
-            <div class="media-zone h-80 w-full mb-12" data-orientation="landscape">
-                <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
-                </button>
-                <div class="w-full h-full flex items-center justify-center" onclick="triggerUpload('skydiving_vid')">
-                    <input type="file" id="skydiving_vid" class="hidden" accept="video/*" onchange="handleMedia(this)">
-                    <div class="p-6 pointer-events-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                        </svg>
-                        <p class="text-sm italic">The Skydiving Video</p>
-                    </div>
+            <!-- Video: Skydiving (File: skydiving.mp4) -->
+            <div class="media-zone mb-12" data-orientation="landscape">
+                <video src="skydiving.mp4" controls onerror="this.style.display='none'"></video>
+                <div class="p-6 opacity-30">
+                    <p class="text-xs">Skydiving Video Placeholder<br>(Upload skydiving.mp4)</p>
                 </div>
             </div>
 
             <p>Bubby, you were the epitome of resilience and strength. Whenever we were together, at some point the conversation would lead to us asking about your past, your parents, siblings and life before the war. You’d speak about the smallest details from your home that brought you joy - such as the wallpaper - and you described your parents as generous people, constantly opening their home to guests. You maintained their values and upheld a welcoming home centered around family.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-12">
-                <div class="media-zone h-48" data-orientation="landscape">
-                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
-                    </button>
-                    <div class="w-full h-full flex items-center justify-center" onclick="triggerUpload('dance')">
-                        <input type="file" id="dance" class="hidden" accept="image/*" onchange="handleMedia(this)">
-                        <p class="text-xs p-4 italic pointer-events-none">Dancing with Ari</p>
-                    </div>
+                <div class="media-zone" data-orientation="landscape">
+                    <img src="dance.jpg" onerror="this.style.display='none'">
+                    <p class="text-xs p-4 opacity-30">Dance (dance.jpg)</p>
                 </div>
-                <div class="media-zone h-48" data-orientation="landscape">
-                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
-                    </button>
-                    <div class="w-full h-full flex items-center justify-center" onclick="triggerUpload('detail')">
-                        <input type="file" id="detail" class="hidden" accept="image/*" onchange="handleMedia(this)">
-                        <p class="text-xs p-4 italic pointer-events-none">A home detail</p>
-                    </div>
+                <div class="media-zone" data-orientation="landscape">
+                    <img src="detail.jpg" onerror="this.style.display='none'">
+                    <p class="text-xs p-4 opacity-30">Detail (detail.jpg)</p>
                 </div>
             </div>
 
@@ -148,23 +105,13 @@
             <p>It was difficult to watch you go back in time and relive the memories - a combination of longing and pain - but at the same time, it was a privilege to have witnessed your strength. It was an emotional and significant day with an everlasting impact on my life. So much so that I have thought about this day many times. One example goes back to a few years ago at work when each individual in my team was tasked with presenting three pivotal or significant life events to the broader team. I chose to speak about that day in Florida where I witnessed you share your story.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-12">
-                <div class="media-zone h-72" data-orientation="portrait">
-                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
-                    </button>
-                    <div class="w-full h-full flex items-center justify-center" onclick="triggerUpload('school_1')">
-                        <input type="file" id="school_1" class="hidden" accept="image/*" onchange="handleMedia(this)">
-                        <p class="text-xs italic pointer-events-none">Bubby at School (1)</p>
-                    </div>
+                <div class="media-zone" data-orientation="portrait">
+                    <img src="school1.jpg" onerror="this.style.display='none'">
+                    <p class="text-xs opacity-30">School 1 (school1.jpg)</p>
                 </div>
-                <div class="media-zone h-72" data-orientation="portrait">
-                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
-                    </button>
-                    <div class="w-full h-full flex items-center justify-center" onclick="triggerUpload('school_2')">
-                        <input type="file" id="school_2" class="hidden" accept="image/*" onchange="handleMedia(this)">
-                        <p class="text-xs italic pointer-events-none">Bubby at School (2)</p>
-                    </div>
+                <div class="media-zone" data-orientation="portrait">
+                    <img src="school2.jpg" onerror="this.style.display='none'">
+                    <p class="text-xs opacity-30">School 2 (school2.jpg)</p>
                 </div>
             </div>
 
@@ -179,26 +126,17 @@
             <p>Your appearance also stayed the same. When I look at photos of you holding me as a baby and compare them to photos of you well into your 80s, there is little difference! Floral prints, cardigans, skirts and knee-length stockings. Neatly-styled hair, that you brushed the sides of with your fingers throughout the day, polished nails and soft skin - you were like the queen (particularly at Sarah’s wedding), always elegant.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-12">
-                <div class="media-zone h-40" data-orientation="landscape" onclick="triggerUpload('drawing')">
-                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
-                    </button>
-                    <input type="file" id="drawing" class="hidden" accept="image/*" onchange="handleMedia(this)">
-                    <p class="text-xs italic pointer-events-none">The drawing</p>
+                <div class="media-zone h-40">
+                    <img src="drawing.jpg" onerror="this.style.display='none'">
+                    <p class="text-xs opacity-30">Drawing (drawing.jpg)</p>
                 </div>
-                <div class="media-zone h-40" data-orientation="landscape" onclick="triggerUpload('food')">
-                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
-                    </button>
-                    <input type="file" id="food" class="hidden" accept="image/*" onchange="handleMedia(this)">
-                    <p class="text-xs italic pointer-events-none">Cooking</p>
+                <div class="media-zone h-40">
+                    <img src="food.jpg" onerror="this.style.display='none'">
+                    <p class="text-xs opacity-30">Food (food.jpg)</p>
                 </div>
-                <div class="media-zone h-40" data-orientation="landscape" onclick="triggerUpload('queen')">
-                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
-                    </button>
-                    <input type="file" id="queen" class="hidden" accept="image/*" onchange="handleMedia(this)">
-                    <p class="text-xs italic pointer-events-none">The Queen</p>
+                <div class="media-zone h-40">
+                    <img src="queen.jpg" onerror="this.style.display='none'">
+                    <p class="text-xs opacity-30">Queen (queen.jpg)</p>
                 </div>
             </div>
 
@@ -210,23 +148,16 @@
 
             <p>Whenever you stayed with us in Silver Spring, I remember wanting to share your bed and constantly be by your side. That seemed to never change as I shared your room in all of the visits over the last 10 years at least.</p>
 
-            <p>You also visited us twice in Australia after we moved, and I distinctly remember you walking every day, making a friend who you invited to Gadi’s bar-mitzvah and cooking us stuffed cabbage (you mentioned that it was a lot of work and I appreciated the effort because that was my favourite dish of yours). </p>
+            <p>You also visited us twice in Australia after we moved, and I distinctly remember you walking every day, making a friend who you invited to Gadi’s bar-mitzvah and cooking us stuffed cabbage (you mentioned that it was a lot of work and I appreciated the effort because that was my favourite dish of yours).</p>
 
-            <!-- Australia Photos -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-12">
-                <div class="media-zone h-56" data-orientation="landscape" onclick="triggerUpload('aus_1')">
-                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
-                    </button>
-                    <input type="file" id="aus_1" class="hidden" accept="image/*" onchange="handleMedia(this)">
-                    <p class="text-xs italic pointer-events-none">Australia 1</p>
+                <div class="media-zone" data-orientation="landscape">
+                    <img src="aus1.jpg" onerror="this.style.display='none'">
+                    <p class="text-xs opacity-30">Australia 1 (aus1.jpg)</p>
                 </div>
-                <div class="media-zone h-56" data-orientation="landscape" onclick="triggerUpload('aus_2')">
-                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
-                    </button>
-                    <input type="file" id="aus_2" class="hidden" accept="image/*" onchange="handleMedia(this)">
-                    <p class="text-xs italic pointer-events-none">Australia 2</p>
+                <div class="media-zone" data-orientation="landscape">
+                    <img src="aus2.jpg" onerror="this.style.display='none'">
+                    <p class="text-xs opacity-30">Australia 2 (aus2.jpg)</p>
                 </div>
             </div>
 
@@ -234,34 +165,24 @@
 
             <p>The second visit in Florida was after both Ari and I had made Aliya and we surprised you at your door. Abba was with us too, and Mason, Robin and Dana joined for a day, as well as Gladys and Avi. It was a trip full of happy memories - we didn't do much except spend time together which is all I could have asked for.</p>
 
-            <!-- Florida Photos -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-12">
-                <div class="media-zone h-56" data-orientation="landscape" onclick="triggerUpload('flo_1')">
-                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
-                    </button>
-                    <input type="file" id="flo_1" class="hidden" accept="image/*" onchange="handleMedia(this)">
-                    <p class="text-xs italic pointer-events-none">Florida 1</p>
+                <div class="media-zone" data-orientation="landscape">
+                    <img src="flo1.jpg" onerror="this.style.display='none'">
+                    <p class="text-xs opacity-30">Florida 1 (flo1.jpg)</p>
                 </div>
-                <div class="media-zone h-56" data-orientation="landscape" onclick="triggerUpload('flo_2')">
-                    <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
-                    </button>
-                    <input type="file" id="flo_2" class="hidden" accept="image/*" onchange="handleMedia(this)">
-                    <p class="text-xs italic pointer-events-none">Florida 2</p>
+                <div class="media-zone" data-orientation="landscape">
+                    <img src="flo2.jpg" onerror="this.style.display='none'">
+                    <p class="text-xs opacity-30">Florida 2 (flo2.jpg)</p>
                 </div>
             </div>
 
             <p>There are many more memories that would fill many more pages - sitting in shule with you in Englewood, going for walks together, discussions about Israel and the time you visited Abba on the kibbutz, the collection of seashells in your bedroom, Sunday bagels at your apartment with Nick and Tony, or at Glady and Martin’s, trying to convince you to eat sushi, spending time at Mason and Robin’s with Eric and Dana when we were much younger, calling you “my cute Bubby”, my most recent visit in Monsey (I also have this on video) hugging you non-stop and feeling your love. The list goes on…</p>
 
-            <!-- Video: Monsey Visit -->
-            <div class="media-zone h-80 w-full mb-12" data-orientation="landscape">
-                <button class="toggle-btn no-print" onclick="toggleOrientation(event, this)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 12h10M12 7v10"/></svg>
-                </button>
-                <div class="w-full h-full flex items-center justify-center" onclick="triggerUpload('monsey_vid')">
-                    <input type="file" id="monsey_vid" class="hidden" accept="video/*" onchange="handleMedia(this)">
-                    <p class="text-sm italic">The Visit in Monsey (Video)</p>
+            <!-- Video: Monsey Visit (File: monsey.mp4) -->
+            <div class="media-zone mb-12" data-orientation="landscape">
+                <video src="monsey.mp4" controls onerror="this.style.display='none'"></video>
+                <div class="p-6 opacity-30">
+                    <p class="text-xs">Monsey Video Placeholder<br>(Upload monsey.mp4)</p>
                 </div>
             </div>
 
@@ -279,67 +200,8 @@
     </div>
 
     <div class="max-w-4xl mx-auto mt-8 no-print flex flex-col items-center space-y-4 pb-20">
-        <button onclick="safePrint()" class="bg-stone-800 text-white px-8 py-3 rounded-full hover:bg-stone-700 transition shadow-lg font-semibold">Save as PDF / Print</button>
+        <button onclick="window.print()" class="bg-stone-800 text-white px-8 py-3 rounded-full hover:bg-stone-700 transition shadow-lg font-semibold">Save as PDF / Print</button>
     </div>
 
-    <script>
-        function triggerUpload(id) {
-            document.getElementById(id).click();
-        }
-
-        function toggleOrientation(event, btn) {
-            event.stopPropagation();
-            const zone = btn.closest('.media-zone');
-            const current = zone.getAttribute('data-orientation');
-            const isHeader = zone.parentElement.tagName === 'HEADER';
-            
-            if (current === 'landscape') {
-                zone.setAttribute('data-orientation', 'portrait');
-                if (isHeader) {
-                    zone.style.height = '20rem';
-                    zone.style.width = '16rem';
-                } else {
-                    zone.style.height = '30rem';
-                }
-            } else {
-                zone.setAttribute('data-orientation', 'landscape');
-                if (isHeader) {
-                    zone.style.height = '16rem'; 
-                    zone.style.width = '100%';
-                } else {
-                    zone.style.height = '12rem';
-                }
-            }
-        }
-
-        function handleMedia(input) {
-            if (input.files && input.files[0]) {
-                const file = input.files[0];
-                const parent = input.parentElement.parentElement;
-                const fileURL = URL.createObjectURL(file);
-                
-                const oldMedia = parent.querySelectorAll('img, video');
-                oldMedia.forEach(m => m.remove());
-
-                let mediaElement;
-                if (file.type.startsWith('video/')) {
-                    mediaElement = document.createElement('video');
-                    mediaElement.src = fileURL;
-                    mediaElement.controls = true;
-                } else {
-                    mediaElement = document.createElement('img');
-                    mediaElement.src = fileURL;
-                }
-
-                parent.appendChild(mediaElement);
-                const content = parent.querySelector('div, p');
-                if (content && content.tagName !== 'BUTTON') content.style.display = 'none';
-            }
-        }
-
-        function safePrint() {
-            window.print();
-        }
-    </script>
 </body>
 </html>
